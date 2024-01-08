@@ -1,0 +1,18 @@
+{
+    "name": "vince/acme-door-pad",
+    "description": "Security Door Pad for ACME Enterprises",
+    "autoload": {
+        "psr-4": {
+            "Vince\\AcmeDoorPad\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "vince",
+            "email": "vincecole6@hotmail.co.uk"
+        }
+    ],
+    "require-dev": {
+        "orchestra/testbench": "^8.19"
+    }
+}
