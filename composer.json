@@ -6,6 +6,11 @@
             "Vince\\AcmeDoorPad\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Vince\\AcmeDoorPad\\Tests\\": "tests"
+        }
+    },
     "authors": [
         {
             "name": "vince",
