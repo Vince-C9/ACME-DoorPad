@@ -79,11 +79,6 @@ class KeyCodeService
             $digit = $number % 10; // find the 'unit' digit (right most digit) of number.
             $reversedNumber = ($reversedNumber * 10) + $digit; // push it to the right
             $number = $number / 10; // Remove the 'digit' from our number.
-
-            if($count==6){
-
-            }
-
         }
         return $reversedNumber;
     }
