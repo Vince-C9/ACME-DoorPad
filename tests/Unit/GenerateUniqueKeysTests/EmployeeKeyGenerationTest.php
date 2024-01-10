@@ -5,7 +5,7 @@ namespace Vince\AcmeDoorPad\Tests\Unit\GenerateUniqueKeysTests;
 
 
 use Orchestra\Testbench\TestCase;
-use Vince\AcmeDoorPad\src\Services\KeyCodes\KeyCodeService;
+use Vince\AcmeDoorPad\Services\KeyCodes\KeyCodeService;
 
 class EmployeeKeyGenerationTest extends TestCase
 {
