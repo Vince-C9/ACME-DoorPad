@@ -17,20 +17,21 @@ class KeyCodeService
      * @return bool
      */
     public function isNotPalindrome($key): bool{
-        /**
-         * Some loose thoughts that I've added here for discussion points.  I figured this approach would be clean,
-         * but probably against the spirit of the tech test!
-         *
-         * strrev is quite efficient and optimised, however relies on the number being cast as a string.
-         * We may wish to do this anyway given we're storing something that may contain leading 0's.
-         * Unless we start using multi-byte characters, it would probably fit fine here.  However if we did that, we'd
-         * likely want to extend this functionality anyway!  For the purpose of sportsmanshi, see below.
-         *
-         * return $key !== strrev((string)$key);
+        /*
+          Some loose thoughts that I've added here for discussion points.  I figured this approach would be clean,
+          but probably against the spirit of the tech test!
+         
+          strrev is quite efficient and optimised, however relies on the number being cast as a string.
+          We may wish to do this anyway given we're storing something that may contain leading 0's.
+          Unless we start using multi-byte characters, it would probably fit fine here.  However if we did that, we'd
+          likely want to extend this functionality anyway!  For the purpose of sportsmanship, see below.
+         
+          return $key !== strrev((string)$key);
          */
 
         $reversedKey = $this->reverseNumber($key);
         return $reversedKey !== $key;
+    }
 
 
 
