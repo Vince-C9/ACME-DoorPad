@@ -16,7 +16,7 @@ class KeyCodeService
      * @param $key
      * @return bool
      */
-    public function isNotPalindrome($key): bool{
+    public function isNotPalindrome(int $key): bool{
         /*
           Some loose thoughts that I've added here for discussion points.  I figured this approach would be clean,
           but probably against the spirit of the tech test!
@@ -33,7 +33,14 @@ class KeyCodeService
         return $reversedKey !== $key;
     }
 
-    public function digitRepititionIsValid($key){
+
+    /**
+     * Uses Regex to determine whether there are 4 or more of the same digit in the provided key.
+     *
+     * @param int $key
+     * @return bool
+     */
+    public function digitRepititionIsValid(int $key): bool{
         /*
             Per above, this can be achieved like this:
 
@@ -64,13 +71,60 @@ class KeyCodeService
         return max($result)>3;
     }
 
-    public function digitSequenceIsValid($key){
+    /**
+     * Uses array maps and iterative loops to determine whether the key has a sequence of 4 or more and if so, determines
+     * it as invalid.
+     *
+     * @param int $key
+     * @return bool
+     */
+    public function digitSequenceIsValid(int $key): bool{
+        /*
+         * Convert key into an array of digits.  Was trying to avoid a foreach/array map but rather than clutter up with
+         * 2 for loops, I thought I'd make the exception.  Shouldn't be an issue with 6 digit keys.
+         */
+        $digits = array_map('intval', str_split($key));
 
+        //Set the previous digit to the first in the array.
+        $previousDigit = $digits[0];
+
+        //Set sequence length to 0
+        $sequenceLength = 0;
+
+        //Iterate digits and store the index.  Start at key 1 (we already have 0 stored)
+        for($i=1; $i < count($digits); $i++)
+        {
+            /*
+             * if the value stored in digits for the current iteration matches the previous digit plus 1, we are in
+             * sequence.  Increment the sequence length, otherwise, reset it.
+             */
+            if ($digits[$i] === $previousDigit+1){
+                $sequenceLength++;
+            }else{
+                $sequenceLength=0;
+            }
+
+            //If the sequence length is greater than 3, then we have hit our snag point.  Return false.
+            if($sequenceLength>3){
+                return false;
+            }
+
+            //Update the previousDigit to match the current digit so that it can be checked in the next iteration
+            $previousDigit = $digits[$i];
+        }
+
+        //If we have no sequences of 4 or more, it is valid!  Return true.
+        return true;
     }
 
 
-    private function reverseNumber($number){
-        $digit = 0;
+    /**
+     * Accepts an integer, then uses a while loop to reverse it.
+     *
+     * @param int $number
+     * @return int
+     */
+    private function reverseNumber(int $number): int{
         $reversedNumber = 0;
 
         $count=0;
