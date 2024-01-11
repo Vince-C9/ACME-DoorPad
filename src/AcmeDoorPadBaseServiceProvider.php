@@ -17,6 +17,6 @@ class AcmeDoorPadBaseServiceProvider extends ServiceProvider
     }
 
     private function registerResources(){
-        $this->loadMigrationsFrom(__DIR__ . '/../migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 }
