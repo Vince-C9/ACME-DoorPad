@@ -3,10 +3,12 @@
 
 namespace Vince\AcmeDoorPad\Tests;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Vince\AcmeDoorPad\Services\KeyCodes\KeyCodeService;
 
 class EmployeeKeyGenerationTest extends TestCase
 {
+    use RefreshDatabase;
 
     /**
      * The codes must not generate palindromes
@@ -27,7 +29,7 @@ class EmployeeKeyGenerationTest extends TestCase
     public function it_does_not_generate_keys_with_more_than_three_repeated_digits(){
         $keyService = new KeyCodeService;
         $key = $keyService->generateUniqueKey();
-        $this->assertTrue($keyService->digitRepititionIsValid($key));
+        $this->assertFalse($keyService->digitRepititionIsNotValid($key));
     }
 
     /**
