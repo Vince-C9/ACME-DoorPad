@@ -1,10 +1,8 @@
 <?php
 
 
-namespace Vince\AcmeDoorPad\Tests\Unit\GenerateUniqueKeysTests;
+namespace Vince\AcmeDoorPad\Tests;
 
-
-use Orchestra\Testbench\TestCase;
 use Vince\AcmeDoorPad\Services\KeyCodes\KeyCodeService;
 
 class EmployeeKeyGenerationTest extends TestCase
@@ -63,6 +61,8 @@ class EmployeeKeyGenerationTest extends TestCase
         $key = $keyService->generateUniqueKey();
         $this->assertTrue(strlen($key)==6);
     }
+
+
 
 
 }
