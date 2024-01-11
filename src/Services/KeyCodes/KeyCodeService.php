@@ -7,6 +7,36 @@ class KeyCodeService
 
     public function generateUniqueKey(){
 
+        /**
+         * Opted to use random_int here because it is cryptographically secure, which seems important
+         * for a security door!   methods like rand, mt_rand and similar are not crypto-secure OTB. 
+         * rand is also very slow and while mt_rand does a lot to fix that, it makes a lot more sense
+         * to stick with something that is secure.
+         * 
+         * We could also write our own method that contains all the possibilities (1,2,3 ... 9,0) and 
+         * use random_int to generate an array key, too, however, time constraints.
+         */
+        $minKey = 100000;
+        $maxKey = 999999;
+
+        $key=random_int($minKey, $maxKey);
+
+        if(!$this->getIsValidKey($key)){
+            return $this->generateUniqueKey();
+        }
+
+        return $key;
+        //Check if key exists in database
+    }
+
+    /**
+     * Wrapper method to call each of the other functions and return true/false based on if any fail
+     *
+     * @param int $key
+     * @return bool
+     */
+    public function getIsValidKey(int $key): bool{
+        return $this->isNotPalindrome($key) && !$this->digitRepititionIsNotValid($key) && $this->digitSequenceIsValid($key);
     }
 
     /**
@@ -40,7 +70,7 @@ class KeyCodeService
      * @param int $key
      * @return bool
      */
-    public function digitRepititionIsValid(int $key): bool{
+    public function digitRepititionIsNotValid(int $key): bool{
         /*
             Per above, this can be achieved like this:
 
@@ -63,7 +93,7 @@ class KeyCodeService
         preg_match_all('/(.)\1+/', $key, $matches);
         $result = array_count_values(str_split($key));
 
-        /*
+       /*
             The result of array_count_values will be the sum of the repeat numbers.  In our case, 1=>5, 2=>1.
             We can be sure if the largest value is over 3, we have at least one duplicate character over 3.  We don't
             care if there is more than one! :)
