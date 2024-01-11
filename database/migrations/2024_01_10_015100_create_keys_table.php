@@ -10,7 +10,6 @@ class CreateKeysTable extends Migration
         Schema::create('keys', function(Blueprint $table){
             $table->increments('id');
             $table->integer('key')->index();
-
         });
     }
 
