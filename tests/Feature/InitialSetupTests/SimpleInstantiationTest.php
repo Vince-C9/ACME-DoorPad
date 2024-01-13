@@ -1,10 +1,9 @@
 <?php
 
 
-namespace Vince\AcmeDoorPad\Tests\Feature;
+namespace Vince\AcmeDoorPad\Tests;
 
 
-use Orchestra\Testbench\TestCase;
 
 /**
  * Class SimpleInstantiationTest
