@@ -41,14 +41,14 @@ class AcmeDoorPadBaseServiceProvider extends ServiceProvider
     private function routeConfiguration()
     {
         return [
-            'prefix' => config('acme_access.acme_access')==null ? 'acme_access' : config('acme_access.acme_access'),
+            'prefix' => config('acme.path')==null ? 'acme_access' : config('acme.path'),
         ];
     }
 
     protected function registerPublishing()
     {
         $this->publishes([
-            __DIR__.'/../config/acme_access.php' => config_path('acme_access.php')
+            __DIR__ . '/../config/acme.php' => config_path('acme.php')
         ], 'acme-config');
     }
 }
