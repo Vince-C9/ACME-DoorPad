@@ -4,6 +4,7 @@
 namespace Vince\AcmeDoorPad\Models;
 
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 class Key extends Model
@@ -13,4 +14,8 @@ class Key extends Model
         'key'
     ];
 
+
+    public function keypadUser(): BelongsTo{
+        return $this->belongsTo(KeypadUser::class);
+    }
 }
