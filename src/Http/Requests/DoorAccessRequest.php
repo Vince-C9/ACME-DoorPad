@@ -4,6 +4,7 @@
 namespace Vince\AcmeDoorPad\Http\Requests;
 
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DoorAccessRequest extends FormRequest
@@ -13,6 +14,10 @@ class DoorAccessRequest extends FormRequest
         /**
          * This is where we'd plumb in any complicated rules, like are you authorised to access.  For a simple thing like this, we can just return as true
          * */
+
+        if(is_null(config('acme'))){
+            throw new AuthorizationException('We cannot authorise this request because the ACME Door Pad Package has not been properly published.  Please run "php artisan vendor:publish --tag=acme-config" and try again.');
+        }
         return true;
     }
 
@@ -27,11 +32,12 @@ class DoorAccessRequest extends FormRequest
 
     public function messages()
     {
+
         return [
-          'key.required' => 'You must provide an access key.',
-          'key.integer' => 'Your access key must be a number.',
-          'key.size' => 'Your access key must be six digits.',
-          'key.exists' => 'Invalid access key'
+          'key.required' => config('acme.door_key_errors.required'),
+          'key.integer' => config('acme.door_key_errors.number'),
+          'key.size' => config('acme.door_key_errors.size'),
+          'key.exists' => config('acme.door_key_errors.exists')
         ];
     }
 }
