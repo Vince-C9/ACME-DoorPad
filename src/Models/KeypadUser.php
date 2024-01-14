@@ -23,7 +23,7 @@ class KeypadUser extends Model
         return $this->hasOne(Key::class);
     }
 
-    public function hasKeyAssigned($user_id){
+    public static function hasKeyAssigned($user_id){
         //Raw SQL as the keys could be very numerous - we want to keep this rapid.
         $userKeySQL = "SELECT id FROM keys WHERE keypad_user_id = ?";
         $result = DB::Select($userKeySQL, [$user_id]);

@@ -13,7 +13,8 @@ class Key extends Model
 {
     protected $guarded = [];
     protected $fillable = [
-        'key'
+        'key',
+        'keypad_user_id'
     ];
 
 
@@ -34,12 +35,12 @@ class Key extends Model
      * @param int $key
      * @param bool $new
      */
-    public function assignKey(int $user_id, int $key){
+    public static function assignKey(int $user_id, int $key){
 
         $sql = "UPDATE keys SET keypad_user_id = ? WHERE keypad_user_id IS NULL AND key = ?";
 
         try{
-            $result = DB::Update($sql, [$user_id, $key]);
+            DB::Update($sql, [$user_id, $key]);
             return true;
         }catch(\Throwable $t){
             report($t->getMessage());
@@ -55,15 +56,33 @@ class Key extends Model
      * @param $user_id
      * @return bool
      */
-    public function stripKey(int $user_id){
-        $sql = "UPDATE keys SET keypad_user_id = NULL WHERE keypad_user_id = ?";
+    public static function stripKey(int $user_id){
 
+        /**
+         * To show eloquent proficiency
+         */
         try{
-            $result = DB::Update($sql, [$user_id]);
+            Key::where('keypad_user_id','=',$user_id)->update([
+                'keypad_user_id'=>null,
+            ]);
             return true;
         }catch(\Throwable $t){
+            dd($t->getMessage());
             report($t->getMessage());
         }
         return false;
+    }
+
+
+    /**
+     * Figures out if the key exists before doing anything bigger.
+     *
+     * @param $key
+     * @return bool
+     */
+    public static function exists($key){
+       $sql = "SELECT id FROM keys WHERE key = ?";
+       $result = DB::Select($sql, [$key]);
+       return count($result) !== 0;
     }
 }
