@@ -7,6 +7,8 @@ namespace Vince\AcmeDoorPad;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use League\Flysystem\Config;
+use Vince\AcmeDoorPad\Console\AssociateKeyWithUser;
+use Vince\AcmeDoorPad\Console\DissociateKeyWithUser;
 use Vince\AcmeDoorPad\Console\SecurityKeyCommand;
 
 class AcmeDoorPadBaseServiceProvider extends ServiceProvider
@@ -24,6 +26,9 @@ class AcmeDoorPadBaseServiceProvider extends ServiceProvider
     public function register(){
         $this->commands([
             SecurityKeyCommand::class,
+            AssociateKeyWithUser::class,
+            DissociateKeyWithUser::class
+
         ]);
     }
 
