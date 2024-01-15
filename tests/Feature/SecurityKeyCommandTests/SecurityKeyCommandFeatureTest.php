@@ -13,7 +13,7 @@ class SecurityKeyCommandFeatureTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Generates 300 keys, chunks them into arbitrary amount ready for dispatching.
+     * Generates 10 keys via the console command and checks for success.
      * @test
      */
 

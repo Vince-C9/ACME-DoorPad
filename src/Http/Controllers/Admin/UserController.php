@@ -1,6 +1,7 @@
 <?php
 
 
+
 namespace Vince\AcmeDoorPad\Http\Controllers\Admin;
 
 

@@ -4,6 +4,7 @@
 namespace Vince\AcmeDoorPad\Http\Controllers\Admin;
 
 
+
 use Illuminate\Routing\Controller;
 use Vince\AcmeDoorPad\Http\Requests\DoorAccessRequest;
 

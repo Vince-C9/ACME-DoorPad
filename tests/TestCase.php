@@ -4,6 +4,7 @@
 namespace Vince\AcmeDoorPad\Tests;
 
 
+use Illuminate\Support\Facades\Config;
 use Vince\AcmeDoorPad\AcmeDoorPadBaseServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -13,7 +14,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
+        $this->artisan('vendor:publish --tag=acme-config');
         $this->withFactories(__DIR__.'/../database/factories');
     }
 
