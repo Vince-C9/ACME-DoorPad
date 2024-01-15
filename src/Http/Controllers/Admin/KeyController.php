@@ -1,7 +1,8 @@
 <?php
 
 
-namespace Vince\AcmeDoorPad\Http\Controllers;
+namespace Vince\AcmeDoorPad\Http\Controllers\Admin;
+
 
 
 use Illuminate\Routing\Controller;
