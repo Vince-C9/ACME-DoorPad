@@ -6,6 +6,7 @@ namespace Vince\AcmeDoorPad\Http\Requests;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
+use Vince\AcmeDoorPad\Rules\KeyIsNotAssigned;
 
 class DoorAccessRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class DoorAccessRequest extends FormRequest
         //Because there are many kinds of CSV, we need to account for that in full to support these csv types.  Further validation could go in around this in the form of custom rules to be 100%
         //that we have the right type of text file.
         return [
-            'key'=>'required|integer|size:6|exists:connection.keys,key'
+            'key'=>['required','integer','digits:6','exists:connection.keys,key', new KeyIsNotAssigned]
         ];
     }
 
@@ -36,7 +37,7 @@ class DoorAccessRequest extends FormRequest
         return [
           'key.required' => config('acme.door_key_errors.required'),
           'key.integer' => config('acme.door_key_errors.number'),
-          'key.size' => config('acme.door_key_errors.size'),
+          'key.digits' => config('acme.door_key_errors.size'),
           'key.exists' => config('acme.door_key_errors.exists')
         ];
     }
