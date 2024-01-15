@@ -6,6 +6,11 @@
             "Vince\\AcmeDoorPad\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Vince\\AcmeDoorPad\\Tests\\": "tests"
+        }
+    },
     "authors": [
         {
             "name": "vince",
@@ -13,6 +18,14 @@
         }
     ],
     "require-dev": {
-        "orchestra/testbench": "^8.19"
+        "orchestra/testbench": "^8.19",
+        "laravel/legacy-factories": "^1.3.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vince\\AcmeDoorPad\\AcmeDoorPadBaseServiceProvider"
+            ]
+        }
     }
 }
