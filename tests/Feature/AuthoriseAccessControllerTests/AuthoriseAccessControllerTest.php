@@ -101,7 +101,7 @@ class AuthoriseAccessControllerTest extends TestCase
     /**
      * @test
      */
-    /*
+
     public function it_doesnt_allow_keys_that_match_the_rules_but_are_not_assigned_to_a_user(){
         $this->withoutExceptionHandling();
         $key = factory(Key::class)->create();
@@ -110,14 +110,15 @@ class AuthoriseAccessControllerTest extends TestCase
         ]);
 
         $response->assertSessionDoesntHaveErrors();
-        $response->assertOk();
+        $response->assertSee("This key is no longer assigned to a user");
+        $response->assertStatus(403);
 
     }
-*/
+
     /**
      * @test
      */
-    /*
+
     public function it_allows_a_user_with_a_valid_assigned_key_to_enter(){
         $user = factory(KeypadUser::class)->create();
         $key = factory(Key::class)->create();
@@ -126,9 +127,10 @@ class AuthoriseAccessControllerTest extends TestCase
         $response = $this->post(route('key_access.login'), [
             'key'=>$key->key
         ]);
-
+        $response->assertSessionDoesntHaveErrors();
+        $response->assertSee("Access Granted");
         $response->assertOk();
     }
-    */
+
 
 }
