@@ -6,6 +6,7 @@ namespace Vince\AcmeDoorPad\Http\Requests;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\JsonResponse;
 use Vince\AcmeDoorPad\Rules\KeyIsNotAssigned;
 
 class DoorAccessRequest extends FormRequest
@@ -40,5 +41,13 @@ class DoorAccessRequest extends FormRequest
           'key.digits' => config('acme.door_key_errors.size'),
           'key.exists' => config('acme.door_key_errors.exists')
         ];
+    }
+
+    public function response(array $errors){
+        // Put whatever response you want here.
+        return new JsonResponse([
+            'status' => '422',
+            'errors' => $errors,
+        ], 422);
     }
 }
