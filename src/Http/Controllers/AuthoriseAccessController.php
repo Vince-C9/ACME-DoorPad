@@ -10,7 +10,10 @@ use Vince\AcmeDoorPad\Http\Requests\DoorAccessRequest;
 class AuthoriseAccessController extends Controller
 {
     public function access_door(DoorAccessRequest $request){
-        dd('test');
+        return response()->json([
+           'status'=>200,
+           'message'=>'Access Granted!' 
+        ]);
     }
 
 }
