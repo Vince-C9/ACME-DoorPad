@@ -7,7 +7,6 @@ namespace Vince\AcmeDoorPad\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Vince\AcmeDoorPad\Services\KeyCodes\KeyCodeService;
 
 class Key extends Model
 {
